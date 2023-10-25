@@ -14,7 +14,8 @@ class PeoteBytesInputNode extends LogicNode {
 	}
 	
 	override function get(from:Int):Dynamic {
-		return peoteBytesInput;
+		if (from == 1) return peoteBytesInput;
+		else return peoteBytesInput.bytesLeft();
 	}
 	
 	override function run(from:Int)
