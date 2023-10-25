@@ -2,7 +2,7 @@ from arm.logicnode.arm_nodes import *
 import re
 
 class PeoteBytesInput(ArmLogicTreeNode):
-    """Peote-Net node to create a new datachunk"""
+    """Peote-Net node to create new BytesInput"""
     bl_idname = 'LNPeoteBytesInputNode'
     bl_label = 'Peote BytesInput'
     arm_version = 0
@@ -14,6 +14,14 @@ class PeoteBytesInput(ArmLogicTreeNode):
                  ('3', '4 MB', 'Max String Size: 4 MegaBytes'),
                  ('4', '512 MB', 'Max String Size: 512 MegaBytes'),
                  ('5', '2 GB', 'Max String Size: 2 GigaBytes'),
+                 ],
+        name='')
+
+    property1: HaxeEnumProperty(
+        'property1',
+        items = [('Default', 'Default Endian', 'Default Endian Byteorder for Integers'),
+                 ('BigEndian', 'Big Endian', 'Big Endian Byteorder for Integers'),
+                 ('LittleEndian', 'Little Endian', 'Little Endian Byteorder for Integers'),
                  ],
         name='')
 
@@ -33,3 +41,7 @@ class PeoteBytesInput(ArmLogicTreeNode):
     def draw_buttons(self, context, layout):
         # enum of max chunksize
         layout.prop(self, 'property0')
+        layout.prop(self, 'property1')
+
+    def draw_label(self) -> str:
+        return 'New BytesInput'

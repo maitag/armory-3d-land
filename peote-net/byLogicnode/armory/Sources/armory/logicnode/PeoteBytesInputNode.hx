@@ -7,6 +7,7 @@ class PeoteBytesInputNode extends LogicNode {
 	var peoteBytesInput:PeoteBytesInput;
 	
 	public var property0:String;  // max chunksize
+	public var property1:String;  // endian
 	
 	public function new(tree:LogicTree) {
 		super(tree);
@@ -18,7 +19,7 @@ class PeoteBytesInputNode extends LogicNode {
 	
 	override function run(from:Int)
 	{
-		peoteBytesInput = new PeoteBytesInput( inputs[1].get(), Std.parseInt(property0) );
+		peoteBytesInput = new PeoteBytesInput( inputs[1].get(), Std.parseInt(property0), switch (property1) {case "BigEndian": true; case "LittleEndian": false; default:null; } );
 		runOutput(0);
 	}
 	

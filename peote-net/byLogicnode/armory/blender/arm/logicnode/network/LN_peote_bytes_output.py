@@ -2,7 +2,7 @@ from arm.logicnode.arm_nodes import *
 import re
 
 class PeoteBytesOutput(ArmLogicTreeNode):
-    """Peote-Net node to create a new datachunk"""
+    """Peote-Net node to create new BytesOutput"""
     bl_idname = 'LNPeoteBytesOutputNode'
     bl_label = 'Peote BytesOutput'
     arm_version = 0
@@ -17,6 +17,14 @@ class PeoteBytesOutput(ArmLogicTreeNode):
                  ],
         name='')
 
+    property1: HaxeEnumProperty(
+        'property1',
+        items = [('default', 'Default Endian', 'Default Endian Byteorder for Integers'),
+                 ('BigEndian', 'Big Endian', 'Big Endian Byteorder for Integers'),
+                 ('LittleEndian', 'Little Endian', 'Little Endian Byteorder for Integers'),
+                 ],
+        name='')
+
     def __init__(self):
         super(PeoteBytesOutput, self).__init__()
         self.register_id()
@@ -28,3 +36,7 @@ class PeoteBytesOutput(ArmLogicTreeNode):
     def draw_buttons(self, context, layout):
         # enum of max chunksize
         layout.prop(self, 'property0')
+        layout.prop(self, 'property1')
+
+    def draw_label(self) -> str:
+        return 'New BytesOutput'
