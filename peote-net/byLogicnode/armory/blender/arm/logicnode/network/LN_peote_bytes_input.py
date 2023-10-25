@@ -37,6 +37,7 @@ class PeoteBytesInput(ArmLogicTreeNode):
         # OUTPUTS:
         self.add_output('ArmNodeSocketAction', 'Out')
         self.add_output('ArmDynamicSocket', 'BytesInput')
+        self.add_output('ArmIntSocket', 'length')
 
     def draw_buttons(self, context, layout):
         # enum of max chunksize
