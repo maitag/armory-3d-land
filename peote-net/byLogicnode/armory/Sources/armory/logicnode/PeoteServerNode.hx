@@ -30,6 +30,7 @@ class PeoteServerNode extends LogicNode {
 			case 0: return peoteServer;
 			case 5: return eventUserId;
 			case 7: return (property0 == "RPC") ? eventRemoteID : bytes;
+			case 8: return serverRemote;
 			default: return null;
 		}
 	}

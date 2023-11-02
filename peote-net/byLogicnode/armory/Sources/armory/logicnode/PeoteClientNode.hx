@@ -26,6 +26,7 @@ class PeoteClientNode extends LogicNode {
 		switch (from) {
 			case 0: return peoteClient;
 			case 5: return (property0 == "RPC") ? eventRemoteID : bytes;
+			case 6: return clientRemote;
 			default: return null;
 		}
 	}

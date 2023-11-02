@@ -12,19 +12,22 @@ class PeoteServerNode(ArmLogicTreeNode):
             if self.property0 == 'RPC':
                 self.inputs.remove(self.inputs.values()[-1])
                 self.outputs.remove(self.outputs.values()[-1])
+                self.outputs.remove(self.outputs.values()[-1])
                 self.add_output('ArmDynamicSocket', 'Bytes')
             self.outputs.values()[-2].name = 'On Data'
         elif value == 1 and self.property0 != 'onDataChunk':
             if self.property0 == 'RPC':
                 self.inputs.remove(self.inputs.values()[-1])
                 self.outputs.remove(self.outputs.values()[-1])
+                self.outputs.remove(self.outputs.values()[-1])
                 self.add_output('ArmDynamicSocket', 'Bytes')
             self.outputs.values()[-2].name = 'On Datachunk'
         elif value == 2 and self.property0 != 'RPC':
             self.add_input('ArmNodeSocketArray', 'Server Remote Classnames')
             self.outputs.remove(self.outputs.values()[-1])
-            self.add_output('ArmIntSocket', 'Client Remote ID')
-            self.outputs.values()[-2].name = 'On Remote ready'
+            self.add_output('ArmIntSocket', 'Remote ID')
+            self.add_output('ArmDynamicSocket', 'User Remote Instances')
+            self.outputs.values()[-3].name = 'On Remote ready'
         self['property0'] = value
 
     def get_mode(self):

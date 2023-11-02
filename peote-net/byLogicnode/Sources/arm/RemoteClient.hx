@@ -39,6 +39,8 @@ class RemoteClient implements Remote
 	// ----- Functions that run on Client and called by Server ----
 	// ------------------------------------------------------------
 	
+	public var test="test";
+	
 	@:remote public function hello():Void {
 		trace('Hello');
 		remote.message("test", 42);
