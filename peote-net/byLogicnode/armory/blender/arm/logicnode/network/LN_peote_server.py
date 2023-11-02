@@ -71,7 +71,7 @@ class PeoteServerNode(ArmLogicTreeNode):
         self.add_output('ArmNodeSocketAction', 'On User Connect')
         self.add_output('ArmNodeSocketAction', 'On User Disconnect')
         self.add_output('ArmNodeSocketAction', 'On User Error')
-        self.add_output('ArmIntSocket', 'User Number')
+        self.add_output('ArmIntSocket', 'User ID')
         self.add_output('ArmNodeSocketAction', 'On Data')
         self.add_output('ArmDynamicSocket', 'Bytes')
 

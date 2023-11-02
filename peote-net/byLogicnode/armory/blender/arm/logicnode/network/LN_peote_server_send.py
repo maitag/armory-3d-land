@@ -15,7 +15,7 @@ class PeoteServerSend(ArmLogicTreeNode):
         # INPUTS:
         self.add_input('ArmNodeSocketAction', 'In')
         self.add_input('ArmDynamicSocket', 'Peote Server')
-        self.add_input('ArmIntSocket', 'User Number')
+        self.add_input('ArmIntSocket', 'User ID')
         self.add_input('ArmDynamicSocket', 'Bytes')
         
         # OUTPUTS:

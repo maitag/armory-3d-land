@@ -46,7 +46,7 @@ class RemoteServer implements Remote
 	}
 	
 	@:remote public function message(msg:String, value:Int):Void {
-		trace('Message:', msg, value);
+		trace('Message:$msg, value:$value');
 	}
 	
 }

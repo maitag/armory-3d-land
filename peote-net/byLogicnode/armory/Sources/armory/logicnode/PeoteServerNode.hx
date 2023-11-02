@@ -170,13 +170,17 @@ class PeoteServerNode extends LogicNode {
 				},
 				onUserDisconnect: function(peoteServer:PeoteServer, userId:Int, reason:Reason) {
 					trace('Server onUserDisconnect: jointNr:${peoteServer.jointNr}, userId:$userId');
-					for (rpc_instance in serverRemote.get(userId)) rpc_instance.disconnect(reason);
+					var rpc_instances = serverRemote.get(userId);
+					serverRemote.remove(userId);
+					for (rpc_instance in rpc_instances) rpc_instance.disconnect(reason);
 					eventUserId = userId;
 					runOutput(3);
 				},				
 				onError: function(peoteServer:PeoteServer, userId:Int, reason:Reason) {
 					trace('Server onCreateJointError:$reason, userId:$userId');
-					for (rpc_instance in serverRemote.get(userId)) rpc_instance.error(reason);
+					var rpc_instances = serverRemote.get(userId);
+					serverRemote.remove(userId);
+					for (rpc_instance in rpc_instances) rpc_instance.error(reason);
 					eventUserId = userId;
 					runOutput(4);
 				}
