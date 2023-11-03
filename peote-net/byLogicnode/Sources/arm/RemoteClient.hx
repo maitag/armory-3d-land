@@ -16,15 +16,17 @@ class RemoteClient implements Remote
 	public var peoteClient:PeoteClient;
 	public var remoteId:Int = 0;
 
+	
 	public function new(peoteClient:PeoteClient, remoteId:Int) {
 		trace('NEW REMOTE CLIENT - remoteId:$remoteId');
 		this.peoteClient = peoteClient;
+		
 		this.remoteId = remoteId;
 	}
 	
 	public inline function remoteIsReady() {
 		remote = RemoteServer.getRemoteClient(peoteClient, remoteId);
-		remote.hello();
+		//remote.hello();
 	}
 		
 	public inline function disconnect(reason:Reason) {
@@ -39,11 +41,13 @@ class RemoteClient implements Remote
 	// ----- Functions that run on Client and called by Server ----
 	// ------------------------------------------------------------
 	
-	public var test="test";
-	
 	@:remote public function hello():Void {
-		trace('Hello');
-		remote.message("test", 42);
+		trace('"Hello" at Client side');
+		//remote.msgAtServer("test", 54321);
+	}
+	
+	@:remote public function msgAtClient(msg:String, value:Int):Void {
+		trace('Message at Client side: $msg, value:$value');
 	}
 	
 }
