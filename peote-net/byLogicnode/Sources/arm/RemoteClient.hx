@@ -15,13 +15,13 @@ class RemoteClient implements Remote
 	
 	public var peoteClient:PeoteClient;
 	public var remoteId:Int = 0;
-
+	public var clientRemote(default, null):Array<Dynamic> = null;
 	
-	public function new(peoteClient:PeoteClient, remoteId:Int) {
+	public function new(peoteClient:PeoteClient, remoteId:Int, clientRemote:Array<Dynamic>) {
 		trace('NEW REMOTE CLIENT - remoteId:$remoteId');
 		this.peoteClient = peoteClient;
-		
 		this.remoteId = remoteId;
+		this.clientRemote = clientRemote;
 	}
 	
 	public inline function remoteIsReady() {

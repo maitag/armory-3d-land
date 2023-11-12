@@ -11,7 +11,7 @@ class PeoteServerNode extends LogicNode {
 
 	var peoteServer:PeoteServer;
 	
-	public var serverRemote(default, null) = new IntMap<Array<Dynamic>>();
+	public var serverRemote(default, null) = null;
 	
 	public var property0:String; // onData, onDataChunk, RPC
 	public var property1:String;  // max chunksize
@@ -122,6 +122,8 @@ class PeoteServerNode extends LogicNode {
 			
 			case "RPC":  //  ------------- using RPC -------------
 			
+			serverRemote = new IntMap<Array<Dynamic>>();
+			
 			var rpc_input_array:Array<String> = inputs[5].get();
 			if (rpc_input_array == null || rpc_input_array.length == 0) throw '"Server Remote Classnames"-inputsocket needs to be an String-Array with at least one haxe RemoteClass name';
 
@@ -150,7 +152,7 @@ class PeoteServerNode extends LogicNode {
 					var rpc_instance_array = new Array<Dynamic>();					
 					var i:Int = 0;
 					for (rpc_class in rpc_classes) {
-						var rpc_instance = Type.createInstance(rpc_class, [peoteServer, userId, i]);
+						var rpc_instance = Type.createInstance(rpc_class, [peoteServer, userId, i, serverRemote]);
 						// trace("class name", Type.getClassName(Type.getClass(_serverRemote)) );
 						// trace("fields", Type.getInstanceFields(Type.getClass(_serverRemote)) );
 						rpc_instance_array.push(rpc_instance);
@@ -163,7 +165,7 @@ class PeoteServerNode extends LogicNode {
 				},
 				onRemote: function(peoteServer:PeoteServer, userId:Int, remoteId:Int) {
 					trace('Server onRemote: jointNr:${peoteServer.jointNr}, userId:$userId, remoteId:$remoteId');
-					serverRemote.get(userId)[remoteId].remoteIsReady( peoteServer, userId );
+					serverRemote.get(userId)[remoteId].remoteIsReady( peoteServer, userId, serverRemote );
 					eventUserId = userId;
 					eventRemoteID = remoteId;
 					runOutput(6);

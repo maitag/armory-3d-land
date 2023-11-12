@@ -10,7 +10,7 @@ class PeoteClientNode extends LogicNode {
 
 	var peoteClient:PeoteClient;
 	
-	public var clientRemote(default, null) = new Array<Dynamic>();
+	public var clientRemote(default, null):Array<Dynamic> = null;
 
 	public var property0:String; // onData, onDataChunk, RPC
 	public var property1:String; // max chunksize
@@ -91,6 +91,8 @@ class PeoteClientNode extends LogicNode {
 			
 			case "RPC":  //  ------------- using RPC -------------
 			
+			clientRemote = new Array<Dynamic>();
+			
 			var rpc_input_array:Array<String> = inputs[4].get();
 			if (rpc_input_array == null || rpc_input_array.length == 0) throw '"Server Remote Classnames"-inputsocket needs to be an String-Array with at least one haxe RemoteClass name';
 			
@@ -126,7 +128,7 @@ class PeoteClientNode extends LogicNode {
 				var rpc_class = Type.resolveClass(Main.projectPackage + "." + rpc_string);
 				if (rpc_class == null) rpc_class = Type.resolveClass(Main.projectPackage + ".node." + rpc_string);
 				if (rpc_class == null) throw 'No class with the name "${Main.projectPackage}.(node.)$rpc_string" found!';
-				clientRemote.push(Type.createInstance(rpc_class, [peoteClient, i]));
+				clientRemote.push(Type.createInstance(rpc_class, [peoteClient, i, clientRemote]));
 				i++;
 			}
 			

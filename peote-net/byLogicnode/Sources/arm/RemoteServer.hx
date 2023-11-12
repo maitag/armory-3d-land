@@ -1,5 +1,7 @@
 package arm;
 
+import haxe.ds.IntMap;
+
 import peote.net.Remote;
 import peote.net.PeoteServer;
 import peote.net.Reason;
@@ -16,12 +18,14 @@ class RemoteServer implements Remote
 	public var peoteServer:PeoteServer;
 	public var remoteId:Int = 0;
 	public var userId:Int = 0;
+	public var serverRemote:IntMap<Array<Dynamic>> = null;
 	
-	public function new(peoteServer:PeoteServer, userId:Int, remoteId:Int) {
+	public function new(peoteServer:PeoteServer, userId:Int, remoteId:Int, serverRemote:IntMap<Array<Dynamic>>) {
 		trace('NEW REMOTE SERVER - userId:$userId, remoteId:$remoteId');
 		this.peoteServer = peoteServer;
 		this.userId = userId;
 		this.remoteId = remoteId;
+		this.serverRemote = serverRemote;
 	}
 	
 	public inline function remoteIsReady() {
